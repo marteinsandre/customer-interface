@@ -1,0 +1,33 @@
+<div class="mui-container">
+  <div class="mui-header">
+    <h2>Clientes</h2>
+    <button class="mui-btn mui-btn-primary" (click)="novoCliente()">Novo Cliente</button>
+  </div>
+
+  <div class="mui-table-wrapper">
+    <table class="mui-table" *ngIf="clientes.length > 0; else semClientes">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Endereço</th>
+          <th>Data de Nascimento</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientes">
+          <td>{{ cliente.nome }}</td>
+          <td>{{ cliente.endereco }}</td>
+          <td>{{ cliente.dataNascimento | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <button class="mui-btn mui-btn-secondary" (click)="editarCliente(cliente.id)">Editar</button>
+            <button class="mui-btn mui-btn-danger" (click)="excluirCliente(cliente.id)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #semClientes>
+      <p class="mui-empty">Nenhum cliente cadastrado.</p>
+    </ng-template>
+  </div>
+</div>
