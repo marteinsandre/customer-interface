@@ -1,0 +1,21 @@
+<div class="mui-container mui-form-container">
+  <h2>{{ isEdit ? 'Editar Cliente' : 'Novo Cliente' }}</h2>
+  <form (ngSubmit)="salvar()" #formCliente="ngForm" class="mui-form">
+    <div class="mui-form-group">
+      <label for="nome">Nome</label>
+      <input id="nome" name="nome" [(ngModel)]="cliente.nome" required class="mui-input" />
+    </div>
+    <div class="mui-form-group">
+      <label for="endereco">Endereço</label>
+      <input id="endereco" name="endereco" [(ngModel)]="cliente.endereco" required class="mui-input" />
+    </div>
+    <div class="mui-form-group">
+      <label for="dataNascimento">Data de Nascimento</label>
+      <input id="dataNascimento" name="dataNascimento" type="date" [(ngModel)]="cliente.dataNascimento" required class="mui-input" />
+    </div>
+    <div class="mui-form-actions">
+      <button type="submit" [disabled]="formCliente.invalid" class="mui-btn mui-btn-primary">Salvar</button>
+      <button type="button" (click)="cancelar()" class="mui-btn mui-btn-secondary">Cancelar</button>
+    </div>
+  </form>
+</div>
