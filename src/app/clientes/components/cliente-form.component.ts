@@ -18,18 +18,31 @@ export class ClienteFormComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  private formatDateToISO(date: Date | undefined): string {
+    if (!date) return '';
+    return new Date(date).toISOString().split('T')[0];
+  }
+
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.isEdit = true;
-      this.clienteService.obterPorId(Number(id)).subscribe(cliente => {
-        if (cliente) {
-          this.cliente = { ...cliente };
-        } else {
-          alert('Cliente não encontrado!');
-          this.router.navigate(['../'], { relativeTo: this.route });
-        }
-      });
+      this.clienteService.obterPorId(id)
+        .subscribe({
+          next: (cliente) => {
+            if (cliente) {
+              this.cliente = {
+                ...cliente,
+                dataNascimento: cliente.dataNascimento ? new Date(cliente.dataNascimento).toISOString().split('T')[0] : undefined
+              };
+            }
+          },
+          error: (error) => {
+            console.error('Erro ao carregar cliente:', error);
+            alert('Erro ao carregar dados do cliente!');
+            this.router.navigate(['/clientes']);
+          }
+        });
     }
   }
 

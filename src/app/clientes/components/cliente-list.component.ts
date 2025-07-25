@@ -28,13 +28,15 @@ export class ClienteListComponent implements OnInit {
     this.router.navigate(['clientes/novo']);
   }
 
-  editarCliente(id: number | undefined): void {
+  editarCliente(id: string | undefined): void {
     if (id) {
-      this.router.navigate(['clientes/editar', id]);
+      this.router.navigate(['/clientes/editar', id]);
+    } else {
+      console.error('ID inválido para edição:', id);
     }
   }
 
-  excluirCliente(id: number | undefined): void {
+  excluirCliente(id: string | undefined): void {
     if (id && confirm('Deseja realmente excluir este cliente?')) {
       this.clienteService.excluir(id).subscribe(() => this.carregarClientes());
     }

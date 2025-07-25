@@ -15,7 +15,7 @@ export class ClienteService {
     return this.http.get<Cliente[]>(this.apiUrl);
   }
 
-  obterPorId(id: number): Observable<Cliente> {
+  obterPorId(id: string): Observable<Cliente> {
     return this.http.get<Cliente>(`${this.apiUrl}/${id}`);
   }
 
@@ -27,7 +27,7 @@ export class ClienteService {
     return this.http.put<Cliente>(`${this.apiUrl}/${cliente.id}`, cliente);
   }
 
-  excluir(id: number): Observable<void> {
+  excluir(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

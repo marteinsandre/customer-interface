@@ -1,8 +1,8 @@
 export class Cliente {
-  id?: number;
+  id?: string;  // Mudando para string pois o backend usa Guid
   nome?: string;
   endereco?: string;
-  dataNascimento?: Date;
+  dataNascimento?: string;
 
   constructor(init?: Partial<Cliente>) {
     Object.assign(this, init);
